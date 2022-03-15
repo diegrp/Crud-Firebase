@@ -6,6 +6,7 @@ import { Home } from "../pages/Home";
 import { AddContact } from "../pages/AddContact";
 import { View } from "../pages/View";
 import { Search } from "../pages/Search"; 
+import { NotFound } from "./NotFound"; 
 
 // Head e Toast
 
@@ -25,6 +26,7 @@ export const AppRouter = () => {
           <Route path="/update/:id" element={<AddContact/>}/>
           <Route path="/view/:id" element={<View/>}/>
           <Route path="/search" element={<Search/>}/>
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
       </div>
     </Router>
