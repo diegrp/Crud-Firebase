@@ -13,8 +13,20 @@ type Props = {
 
 export const Button = ( { path, type, active, onClick, children }: Props ) => {
   return(
-    <div>
-      ...
-    </div>
+    <>
+      {type === "submit" ? 
+        (
+          <C.ButtonSubmit type={type}>
+            {children}
+          </C.ButtonSubmit>
+        )
+        :
+        (
+          <C.Button to={path} active={active} onClick={onClick}>
+            {children}
+          </C.Button>
+        )
+      }
+    </>
   )
 }
