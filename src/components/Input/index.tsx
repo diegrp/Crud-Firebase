@@ -24,16 +24,37 @@ type SelectProps = {
 
 export const Input = ( { label, id, name, type, value, onChange, ...rest }: Props ) => {
   return(
-    <div>
-      ...
-    </div>
+    <C.InputWrapper>
+      <label htmlFor={name}>
+        {label}
+        <input
+          id={id}
+          name={name}
+          type={type}
+          value={value}
+          onChange={onChange}
+          {...rest}
+        />
+      </label>
+    </C.InputWrapper>
   )
 }
 
 export const Select = ( { label, id, name, value, onChange, children, ...rest }: SelectProps ) => {
   return (
-    <div>
-      ...
-    </div>
+    <C.SelectWrapper>
+      <label htmlFor={name}>
+        {label}
+        <select
+          id={id}
+          name={name}
+          value={value}
+          onChange={onChange}
+          {...rest}
+        >
+          {children}
+        </select>
+      </label>
+    </C.SelectWrapper>
   )
 }
