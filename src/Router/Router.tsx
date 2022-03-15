@@ -7,9 +7,17 @@ import { AddContact } from "../pages/AddContact";
 import { View } from "../pages/View";
 import { Search } from "../pages/Search"; 
 
+// Head e Toast
+
+import { Header } from "../components/Header";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 export const AppRouter = () => {
   return(
     <Router>
+      <ToastContainer position="top-center"/>
+      <Header/>
       <div className="app">
         <Routes>
           <Route path="/" element={<Home/>}/>
