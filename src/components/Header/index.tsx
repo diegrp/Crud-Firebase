@@ -1,8 +1,37 @@
+import { FormEvent, useEffect, useState } from "react";
+import { Button } from "../../components/Button/";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Input } from "../Input";
 import * as C from "./styles";
 
 // Header Component - Logo, filter e nav button
 
 export const Header = () => {
+
+  const location = useLocation();
+  const { pathname } = location;
+  const navigate = useNavigate();
+  
+  const [ activeTab, setActiveTab ] = useState("");
+  const [ search, setSearch ] = useState("");
+
+  useEffect(() => {
+    if(pathname === '/'){
+      setActiveTab('home');
+    }else if(pathname === '/addcontact'){
+      setActiveTab('addcontact');
+    }else{
+      setActiveTab('');
+    }
+  },[pathname]);
+
+
+  const handleSearchForm = (e: FormEvent <HTMLFormElement>) => {
+    e.preventDefault();
+    navigate(`/search?name=${search}`);
+    setSearch("");
+  }
+
   return(
     <C.Container>
       <C.Header>
