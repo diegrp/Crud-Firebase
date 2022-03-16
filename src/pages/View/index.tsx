@@ -8,6 +8,15 @@ import * as C from "./styles";
 // Visualizar dados do usuário
 
 export const View = () => {
+
+  const [ user, setUser ] = useState<User>({});
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    viewDetailContact(setUser, id);
+  },[id]);
+  
   return(
     <C.Container>
       <Head title="Detalhes do Usuário" description="Dados cadastrais do contato na lista"/>
