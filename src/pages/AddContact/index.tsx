@@ -13,6 +13,54 @@ import * as C from "./styles";
 // Adicionar contato na lista
 
 export const AddContact = () => {
+
+  const [ state, setState ] = useState<State>(initialState);
+  const [ data, setData ] = useState<Data>({});
+
+  const navigate = useNavigate();
+  const {id} = useParams();
+
+  const { nome, email, telefone, status } = state;
+
+  const handleInputChange = ( e: ChangeEvent <HTMLInputElement | HTMLSelectElement> ) => {
+    const { name, value } = e.target;
+    setState( { ...state, [name]: value } );
+  }
+
+  const handleFormSubmit = ( e: FormEvent <HTMLFormElement> ) => {
+    e.preventDefault();
+    if(!nome || !email || !telefone || !status){
+      toast.error("Preencha os campos corretamente para continuar");
+    }else{
+      if(!id){
+        addContact(state, toast);
+      }else{
+        updateContact(state, toast, id);
+      } 
+      setTimeout(() => navigate('/') , 300);
+    }
+  }
+
+  useEffect(() => {
+    updateToList(setData);
+
+    return () => {
+      setData({});
+    }
+  },[]);
+
+  useEffect(() => {
+    if(id){
+      setState({...data[id]});
+    }else{
+      setState(initialState);
+    }
+
+    return () => {
+      setState(initialState);
+    }
+  },[id, data]);
+  
   return(
     <C.Container>
       <Head title={`${id ? "Atualizar Contato":"Adicionar Contato"}`} description="Adicione seu contato na lista"/>
