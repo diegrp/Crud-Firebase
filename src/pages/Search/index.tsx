@@ -9,6 +9,25 @@ import * as C from "./styles";
 // Procurar contato na lista
 
 export const Search = () => {
+
+  const [ data, setData ] = useState<Data>({});
+
+  const location = useLocation();
+
+  const useQuery = () => {
+    return new URLSearchParams(location.search);
+  }
+
+  let userquery = useQuery();
+  let usersearch = userquery.get("name");
+
+  useEffect(() => {
+    searchContact(usersearch, setData);
+    return () => {
+      setData({});
+    }
+  },[usersearch]);
+  
   return(
     <>
       <Head title="Procurar Contato" description="procure o contato na lista" />
