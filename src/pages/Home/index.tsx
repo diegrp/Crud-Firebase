@@ -10,6 +10,38 @@ import * as C from "./styles";
 // Lista de Contatos e Filtragem de dados
 
 export const Home = () => {
+
+  const [ data, setData ] = useState<Data>({});
+  const [ sortedData, setSortedData ] = useState<any[]>([]);
+  const [ sort, setSort ] = useState(false);
+
+  useEffect(() => {
+    listContact(setData);
+
+    return () => {
+      setData({});
+    }
+  },[]);
+
+  const onDelete = ( id: string ) => {
+    deleteContact(id, toast);
+  }
+
+  const handleSelectChange = ( e: ChangeEvent <HTMLInputElement | HTMLSelectElement> ) => {
+    const { value } = e.target;
+    setSort(true);
+    sortContact(value, setSortedData);
+  }
+
+  const handleResetClick = () => {
+    setSort(false);
+    resetListContact(setData);
+  }
+
+  const filterData = ( value: string ) => {
+    filterContact(value, setData);
+  }
+  
   return(
     <C.Container>
       <Head title="Lista de Contatos" description="Gerencie seus dados cadastrais"/>
